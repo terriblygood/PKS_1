@@ -1,0 +1,57 @@
+﻿<Window x:Class="pks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="1000">
+
+    <Window.Resources>
+        <!-- Стиль для TextBox с подсказкой -->
+        <Style x:Key="WatermarkTextBox" TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+                <Setter Property="Width" Value="200"/>
+                <Setter Property="Margin" Value="10,10,0,0"/>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Поле для поиска по названию книги с плейсхолдером -->
+        <Grid>
+            <!-- Помещаем TextBlock, который будет служить Watermark -->
+            <TextBlock x:Name="WatermarkText" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" Foreground="Gray" 
+                       Text="Поиск по названию" Visibility="Collapsed" />
+            <TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,10,0,0"
+                     TextChanged="SearchTextBox_TextChanged" Style="{StaticResource WatermarkTextBox}" GotFocus="SearchTextBox_GotFocus" LostFocus="SearchTextBox_LostFocus"/>
+        </Grid>
+
+        <!-- Панели фильтрации по автору и жанру -->
+        <ComboBox x:Name="AuthorFilterComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="220,10,0,0" DisplayMemberPath="FullName" SelectionChanged="AuthorFilterComboBox_SelectionChanged"/>
+        <ComboBox x:Name="GenreFilterComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="440,10,0,0" DisplayMemberPath="Name" SelectionChanged="GenreFilterComboBox_SelectionChanged"/>
+
+        <!-- DataGrid для отображения книг -->
+        <DataGrid x:Name="BooksGrid" AutoGenerateColumns="False" Margin="10,50,10,50">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Автор" Binding="{Binding Author.FullName}" />
+                <DataGridTextColumn Header="Год издания" Binding="{Binding PublishYear}" />
+                <DataGridTextColumn Header="Жанр" Binding="{Binding Genre.Name}" />
+                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}" />
+                <DataGridTextColumn Header="Количество в наличии" Binding="{Binding QuantityInStock}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Кнопки для добавления, редактирования и удаления книги -->
+        <Button Content="Добавить книгу" Click="AddBookButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="10,370,0,0"/>
+        <Button Content="Редактировать книгу" Click="EditBookButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="120,370,0,0"/>
+        <Button Content="Удалить книгу" Click="DeleteBookButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="250,370,0,0"/>
+
+        <!-- Кнопки для управления жанрами и авторами -->
+        <Button Content="Управление жанрами" Click="ManageGenresButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10,310,0,0"/>
+        <Button Content="Управление авторами" Click="ManageAuthorsButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="180,310,0,0"/>
+        <Button Content="Сбросить фильтры" Click="ResetFiltersButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="650,10,0,0"/>
+
+        <!-- Текст для отображения общего количества книг -->
+        <TextBlock x:Name="TotalBooksTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="650,50,0,0" FontSize="14" />
+    </Grid>
+</Window>

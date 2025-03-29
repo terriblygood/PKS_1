@@ -1,0 +1,17 @@
+﻿<Window x:Class="pks.AddEditAuthorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Добавить/Редактировать автора" Height="250" Width="400">
+    <Grid>
+        <TextBlock Text="Имя" VerticalAlignment="Top" Margin="10,10,0,0"/>
+        <TextBox x:Name="FirstNameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,30,0,0"/>
+
+        <TextBlock Text="Фамилия" VerticalAlignment="Top" Margin="10,70,0,0"/>
+        <TextBox x:Name="LastNameTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,90,0,0"/>
+
+        <TextBlock Text="Страна" VerticalAlignment="Top" Margin="10,130,0,0"/>
+        <TextBox x:Name="CountryTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="10,150,0,0"/>
+
+        <Button Content="Сохранить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,190,0,0" Click="SaveButton_Click"/>
+    </Grid>
+</Window>
